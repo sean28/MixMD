@@ -2,10 +2,11 @@
 
 ## Table of Contents
 - [Principles of Probe Combination](#principles-of-probe-combination)
+  - [Common Probe Information](#common-probe-Information)
   - [Standard Probe Combination Table](#standard-probe-combination-table)
   - [Quick Classification for Probe Selection](#quick-classification-for-probe-selection)
   - [Common Probe Combination Examples](#common-probe-combination-examples)
-  - [Pro Tips (Advanced Strategy)](#pro-tips-advanced-strategy)
+  - [Pro Tips (Advanced Strategy)](#pro-tips-advanced-strategy) 
 - [Detailed Usage Instructions for Individual Molecular Probes (for Hybrid Solvent MD)](#detailed-usage-instructions-for-individual-molecular-probes-for-hybrid-solvent-md)
   - [formamide](#formamide)
   - [dmso](#dmso)
@@ -29,6 +30,37 @@
 In mixed-solvent molecular dynamics (MixMD) simulations, a rational combination of different molecular probes greatly enhances the detection of cryptic pockets and potential binding hotspots in biomolecules.
 
 This guide summarizes the properties, classifications, and recommended combinations of commonly used molecular probes for modeling and simulation reference.
+
+---
+
+## Common Probe Information
+
+This table summarizes the molecular weight and density information of 13 commonly used molecular probes.
+
+| Probe | Molecular Weight (g/mol) | Density (g/mL) | Notes |
+|:---|:---|:---|:---|
+| formamide | 45.041 | 1.13 |  |
+| dmso | 78.129 | 1.10 |  |
+| meoh (methanol) | 32.042 | 0.791 |  |
+| isopropanol | 60.096 | 0.785 |  |
+| acetonitrile | 41.053 | 0.786 |  |
+| guanidinium | 60.080 | 1.260 | Estimated using guanidinium chloride aqueous solution density (approximation) |
+| acetate | 59.044 | 1.0492 | Approximated using acetic acid liquid density |
+| n-methylacetamide | 73.095 | 0.957 |  |
+| benzene | 78.114 | 0.874 |  |
+| toluene | 92.141 | 0.867 |  |
+| phenol | 94.113 | 1.071 |  |
+| indole | 117.151 | 1.220 |  |
+| pyrimidine | 80.090 | 1.016 |  |
+
+---
+
+### Special Notes
+- **Guanidinium**:  
+  Pure guanidinium cation density is unavailable; estimated based on typical guanidinium chloride solution density (~1.26 g/mL).
+
+- **Acetate**:  
+  As pure acetate ion density is not measurable directly, acetic acid (CH₃COOH) liquid density (~1.0492 g/mL) is used as an approximation.
 
 ---
 
