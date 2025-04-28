@@ -38,7 +38,7 @@ This guide summarizes the properties, classifications, and recommended combinati
 This table summarizes the molecular weight and density information of 13 commonly used molecular probes.
 
 | Probe | Molecular Weight (g/mol) | Density (g/mL) |
-|:---|:---|:---|
+|:---:|:---:|:---:|
 | formamide | 45.041 | 1.13 |
 | dmso | 78.129 | 1.10 | 
 | meoh (methanol) | 32.042 | 0.791 | 
