@@ -6,7 +6,6 @@
   - [Quick Classification for Probe Selection](#quick-classification-for-probe-selection)
   - [Common Probe Combination Examples](#common-probe-combination-examples)
   - [Pro Tips (Advanced Strategy)](#pro-tips-advanced-strategy)
-  - [Conclusion](#conclusion)
 - [Detailed Usage Instructions for Individual Molecular Probes (for Hybrid Solvent MD)](#detailed-usage-instructions-for-individual-molecular-probes-for-hybrid-solvent-md)
   - [formamide](#formamide)
   - [dmso](#dmso)
