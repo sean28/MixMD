@@ -1,5 +1,32 @@
 # Molecular Probe Combination Guide (Hybrid Solvent Inserter)
 
+## Table of Contents
+- [Principles of Probe Combination](#principles-of-probe-combination)
+- [Standard Probe Combination Table](#standard-probe-combination-table)
+- [Quick Classification for Probe Selection](#quick-classification-for-probe-selection)
+- [Common Probe Combination Examples](#common-probe-combination-examples)
+- [Pro Tips (Advanced Strategy)](#pro-tips-advanced-strategy)
+- [Conclusion](#conclusion)
+- [Detailed Usage Instructions for Individual Molecular Probes (for Hybrid Solvent MD)](#detailed-usage-instructions-for-individual-molecular-probes-for-hybrid-solvent-md)
+  - [formamide](#formamide)
+  - [dmso](#dmso)
+  - [meoh (methanol)](#meoh-methanol)
+  - [isopropanol](#isopropanol)
+  - [acetonitrile](#acetonitrile)
+  - [guanidinium](#guanidinium)
+  - [acetate](#acetate)
+  - [n-methylacetamide (NMA)](#n-methylacetamide-nma)
+  - [benzene](#benzene)
+  - [toluene](#toluene)
+  - [phenol](#phenol)
+  - [indole](#indole)
+  - [pyrimidine](#pyrimidine)
+- [Conclusion](#conclusion)
+
+---
+
+# Molecular Probe Combination Guide (Hybrid Solvent Inserter)
+
 In mixed-solvent molecular dynamics (MixMD) simulations, a rational combination of different molecular probes greatly enhances the detection of cryptic pockets and potential binding hotspots in biomolecules.
 
 This guide summarizes the properties, classifications, and recommended combinations of commonly used molecular probes for modeling and simulation reference.
