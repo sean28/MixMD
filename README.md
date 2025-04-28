@@ -2,11 +2,11 @@
 
 ## Table of Contents
 - [Principles of Probe Combination](#principles-of-probe-combination)
-- [Standard Probe Combination Table](#standard-probe-combination-table)
-- [Quick Classification for Probe Selection](#quick-classification-for-probe-selection)
-- [Common Probe Combination Examples](#common-probe-combination-examples)
-- [Pro Tips (Advanced Strategy)](#pro-tips-advanced-strategy)
-- [Conclusion](#conclusion)
+  - [Standard Probe Combination Table](#standard-probe-combination-table)
+  - [Quick Classification for Probe Selection](#quick-classification-for-probe-selection)
+  - [Common Probe Combination Examples](#common-probe-combination-examples)
+  - [Pro Tips (Advanced Strategy)](#pro-tips-advanced-strategy)
+  - [Conclusion](#conclusion)
 - [Detailed Usage Instructions for Individual Molecular Probes (for Hybrid Solvent MD)](#detailed-usage-instructions-for-individual-molecular-probes-for-hybrid-solvent-md)
   - [formamide](#formamide)
   - [dmso](#dmso)
@@ -88,12 +88,6 @@ This guide summarizes the properties, classifications, and recommended combinati
 
 ---
 
-# Conclusion
-
-Rational combination of molecular probes significantly improves the efficiency of cryptic pocket and hotspot detection.  
-This strategy is a critical step in advanced simulation methods such as MixMD, FEP, and FragMap, providing vital insights for structure-based drug discovery.
-
----
 
 # Detailed Usage Instructions for Individual Molecular Probes (for Hybrid Solvent MD)
 
@@ -310,6 +304,7 @@ This section provides detailed descriptions, usage environments, and combination
 
 # Conclusion
 
-Scientific selection and combination of molecular probes can significantly improve the efficiency of cryptic pocket detection, providing a solid structural foundation for drug discovery and target validation.
+Rational combination of molecular probes significantly improves the efficiency of cryptic pocket and hotspot detection.  
+This strategy is a critical step in advanced simulation methods such as MixMD, FEP, and FragMap, providing vital insights for structure-based drug discovery. Scientific selection and combination of molecular probes can significantly improve the efficiency of cryptic pocket detection, providing a solid structural foundation for drug discovery and target validation.
 
 ---
