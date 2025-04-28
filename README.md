@@ -37,32 +37,45 @@ This guide summarizes the properties, classifications, and recommended combinati
 
 This table summarizes the molecular weight and density information of 13 commonly used molecular probes.
 
-| Probe | Molecular Weight (g/mol) | Density (g/mL) | Notes |
-|:---|:---|:---|:---|
-| formamide | 45.041 | 1.13 |  |
-| dmso | 78.129 | 1.10 |  |
-| meoh (methanol) | 32.042 | 0.791 |  |
-| isopropanol | 60.096 | 0.785 |  |
-| acetonitrile | 41.053 | 0.786 |  |
-| guanidinium | 60.080 | 1.260 | Estimated using guanidinium chloride aqueous solution density (approximation) |
-| acetate | 59.044 | 1.0492 | Approximated using acetic acid liquid density |
-| n-methylacetamide | 73.095 | 0.957 |  |
-| benzene | 78.114 | 0.874 |  |
-| toluene | 92.141 | 0.867 |  |
-| phenol | 94.113 | 1.071 |  |
-| indole | 117.151 | 1.220 |  |
-| pyrimidine | 80.090 | 1.016 |  |
+| Probe | Molecular Weight (g/mol) | Density (g/mL) |
+|:---|:---|:---|
+| formamide | 45.041 | 1.13 |
+| dmso | 78.129 | 1.10 | 
+| meoh (methanol) | 32.042 | 0.791 | 
+| isopropanol | 60.096 | 0.785 | 
+| acetonitrile | 41.053 | 0.786 | 
+| guanidinium | 60.080 | 1.260 |
+| acetate | 59.044 | 1.0492 | 
+| n-methylacetamide | 73.095 | 0.957 | 
+| benzene | 78.114 | 0.874 | 
+| toluene | 92.141 | 0.867 | 
+| phenol | 94.113 | 1.071 | 
+| indole | 117.151 | 1.220 | 
+| pyrimidine | 80.090 | 1.016 | 
+
+---
+
+### Notes
+- **Guanidinium**:  
+  Pure guanidinium cation density is unavailable; estimated based on typical guanidinium chloride solution density (~1.26 g/mL). Can detect negatively charged regions on protein surfaces (such as near Asp and Glu residues)
+
+- **Acetate**:  
+  As pure acetate ion density is not measurable directly, acetic acid (CH₃COOH) liquid density (~1.0492 g/mL) is used as an approximation. Can detect positively charged regions on protein surfaces (such as near LyS and Arg residues)
 
 ---
 
 ### Special Notes
-- **Guanidinium**:  
-  Pure guanidinium cation density is unavailable; estimated based on typical guanidinium chloride solution density (~1.26 g/mL).
+---
 
-- **Acetate**:  
-  As pure acetate ion density is not measurable directly, acetic acid (CH₃COOH) liquid density (~1.0492 g/mL) is used as an approximation.
+1. Electric neutral system
+If many charged small molecules are added, additional Na * and CI ions must be added in the simulation to balance the overall charge
+2. Short range exclusion
+• A small amount of random dispersion can be added to the initial distribution of probes to prevent excessive stacking
+3. Minimize energy
+After adding the probe, it is very important to perform a rigorous round of restrained minimization!
 
 ---
+
 
 ## Principles of Probe Combination
 
