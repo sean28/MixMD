@@ -67,12 +67,9 @@ This table summarizes the molecular weight and density information of 13 commonl
 ### Special Notes
 ---
 
-1. Electric neutral system
-If many charged small molecules are added, additional Na * and CI ions must be added in the simulation to balance the overall charge
-2. Short range exclusion
-• A small amount of random dispersion can be added to the initial distribution of probes to prevent excessive stacking
-3. Minimize energy
-After adding the probe, it is very important to perform a rigorous round of restrained minimization!
+1. Electric neutral system: If many charged small molecules are added, additional Na * and CI ions must be added in the simulation to balance the overall charge
+2. Short range exclusion: A small amount of random dispersion can be added to the initial distribution of probes to prevent excessive stacking
+3. Minimize energy: After adding the probe, it is very important to perform a rigorous round of restrained minimization!
 
 ---
 
