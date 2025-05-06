@@ -1,13 +1,8 @@
-# Molecular Probe Combination Guide (Hybrid Solvent Inserter)
+# Molecular Probes Guide (Hybrid Solvent Inserter)
 
 ## Table of Contents
-- [Principles of Probe Combination](#principles-of-probe-combination)
-  - [Common Probe Information](#common-probe-Information)
-  - [Standard Probe Combination Table](#standard-probe-combination-table)
-  - [Quick Classification for Probe Selection](#quick-classification-for-probe-selection)
-  - [Common Probe Combination Examples](#common-probe-combination-examples)
-  - [Pro Tips (Advanced Strategy)](#pro-tips-advanced-strategy) 
-- [Detailed Usage Instructions for Individual Molecular Probes (for Hybrid Solvent MD)](#detailed-usage-instructions-for-individual-molecular-probes-for-hybrid-solvent-md)
+- [Principles of Usage Instructions for Probes ](#principles-of-usage-instructions-for-probes)
+  - [Common Probe Information](#common-probe-Information) 
   - [formamide](#formamide)
   - [dmso](#dmso)
   - [meoh (methanol)](#meoh-methanol)
@@ -25,13 +20,15 @@
 
 ---
 
-# Molecular Probe Combination Guide (Hybrid Solvent Inserter)
+# Molecular Probes Guide (Hybrid Solvent Inserter)
 
 In mixed-solvent molecular dynamics (MixMD) simulations, a rational combination of different molecular probes greatly enhances the detection of cryptic pockets and potential binding hotspots in biomolecules.
 
-This guide summarizes the properties, classifications, and recommended combinations of commonly used molecular probes for modeling and simulation reference.
+This guide summarizes the properties, classifications.
 
 ---
+
+# Principles of Usage Instructions for Probes
 
 ## Common Probe Information
 
@@ -70,69 +67,6 @@ This table summarizes the molecular weight and density information of 13 commonl
 1. Electric neutral system: If many charged small molecules are added, additional Na * and CI ions must be added in the simulation to balance the overall charge
 2. Short range exclusion: A small amount of random dispersion can be added to the initial distribution of probes to prevent excessive stacking
 3. Minimize energy: After adding the probe, it is very important to perform a rigorous round of restrained minimization!
-
----
-
-
-## Principles of Probe Combination
-
-- Combine polar molecules with hydrophobic molecules
-- Combine hydrogen bond donors with hydrogen bond acceptors
-- Use complementary charged probes (positive vs. negative)
-- Combine small molecules with aromatic probes to cover diverse pocket types
-
----
-
-## Standard Probe Combination Table
-
-| Pocket Type | Recommended Probe Combination | Reason |
-|:--|:--|:--|
-| **Polar pockets** | formamide + meoh + n-methylacetamide | Strong hydrogen bond donor (formamide) + moderate polarity (meoh) + peptide backbone mimic (n-methylacetamide) |
-| **Hydrophobic pockets** | benzene + toluene + isopropanol | Aromatic hydrophobic probes (benzene, toluene) + small hydrophobic probe (isopropanol) |
-| **Aromatic pockets** | indole + benzene + pyrimidine | Large aromatic probe (indole) + small aromatic probe (benzene) + polar aromatic probe (pyrimidine) |
-| **Positively charged pockets** | acetate + formamide | Negative charge probe (acetate) + polar hydrogen-bonding probe (formamide) |
-| **Negatively charged pockets** | guanidinium + meoh | Positive charge probe (guanidinium) + moderate polarity probe (meoh) |
-| **Mixed hydrophobic-polar pockets** | dmso + isopropanol + benzene | Highly polar-apolar compatible probe (dmso) + small hydrophobic probe (isopropanol) + aromatic hydrophobic probe (benzene) |
-| **Large hydrophobic cavities** | indole + toluene | Large aromatic scaffold (indole) + hydrophobic filler (toluene) |
-
----
-
-## Quick Classification for Probe Selection
-
-- **Polar group**: formamide, meoh, n-methylacetamide
-- **Hydrophobic group**: benzene, toluene, isopropanol
-- **Aromatic group**: indole, benzene, pyrimidine
-- **Charged group**: guanidinium (positive), acetate (negative)
-- **Universal probe**: dmso (compatible with most environments)
-
----
-
-## Common Probe Combination Examples
-
-| Use Case | Probe Combination | Purpose |
-|:--|:--|:--|
-| **Polar environment detection** | formamide + meoh | Capture polar, hydrogen bond-rich regions |
-| **Hydrophobic surface detection** | benzene + toluene | Detect hydrophobic patches and hidden pockets |
-| **Aromatic stacking detection** | indole + benzene | Capture stacking interactions (e.g., Trp-rich areas) |
-| **Charge interaction detection** | guanidinium + acetate | Complementary charge detection for ionic pockets |
-| **Mixed pocket detection** | dmso + benzene + isopropanol | Cover both hydrophobic and polar surface features |
-
----
-
-## Pro Tips (Advanced Strategy)
-
-- Polar probes (formamide, meoh) are ideal for active sites and polar crevices.
-- Hydrophobic probes (benzene, toluene) reveal traditional druggable hydrophobic pockets.
-- Aromatic probes (indole, pyrimidine) help detect stacking and aromatic-rich regions.
-- Charged probes (guanidinium, acetate) can uncover ion binding sites or charge-shielded pockets.
-- Universal probe DMSO can be combined with almost any other probes for enhanced coverage.
-
----
-
-
-# Detailed Usage Instructions for Individual Molecular Probes (for Hybrid Solvent MD)
-
-This section provides detailed descriptions, usage environments, and combination suggestions for 13 commonly used molecular probes in mixed-solvent simulations.
 
 ---
 
