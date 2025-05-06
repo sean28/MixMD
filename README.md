@@ -1,7 +1,7 @@
 # Molecular Probes Guide (Hybrid Solvent Inserter)
 
 ## Table of Contents
-- [Principles of Usage Instructions for Probes ](#principles-of-usage-instructions-for-probes)
+- [Principles of Usage Instructions for single probes ](#principles-of-usage-instructions-for-single-probe)
   - [Common Probe Information](#common-probe-Information) 
   - [formamide](#formamide)
   - [dmso](#dmso)
@@ -22,13 +22,11 @@
 
 # Molecular Probes Guide (Hybrid Solvent Inserter)
 
-In mixed-solvent molecular dynamics (MixMD) simulations, a rational combination of different molecular probes greatly enhances the detection of cryptic pockets and potential binding hotspots in biomolecules.
-
-This guide summarizes the properties, classifications.
+In mixed-solvent molecular dynamics (MixMD) simulations, a rational combination of different molecular probes greatly enhances the detection of cryptic pockets and potential binding hotspots in biomolecules. This guide summarizes the properties, classifications.
 
 ---
 
-# Principles of Usage Instructions for Probes
+# Principles of Usage Instructions for Single probe
 
 ## Common Probe Information
 
