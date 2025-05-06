@@ -23,7 +23,8 @@
 # Molecular Probes Guide (Hybrid Solvent Inserter)
 
 In mixed-solvent molecular dynamics (MixMD) simulations, a rational combination of different molecular probes greatly enhances the detection of cryptic pockets and potential binding hotspots in biomolecules. This guide summarizes the properties, classifications.
-I redeployed this online tool in my repository and you can use this tool for free by clicking <a href="https://skvohekthzsp.ap-southeast-1.clawcloudrun.com">here</a>.</div>
+
+MixMD System Builder is a web-based application for generating mixed-solvent molecular simulation systems. It supports protein structure upload, flexible probe selection, box configuration, and automatic topology generation. Users can easily integrate custom molecules and apply optional solvation and ionization, resulting in ready-to-use simulation packages. I redeployed this online tool in my repository and you can use this tool for free by clicking <a href="https://skvohekthzsp.ap-southeast-1.clawcloudrun.com">here</a>.</div>
 <div style="text-align: justify"> <br> </div>
 ---
 
