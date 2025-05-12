@@ -5,12 +5,12 @@
   - [Common Probe Information](#common-probe-information) 
   - [formamide](#formamide)
   - [dmso](#dmso)
-  - [meoh (methanol)](#meoh-methanol)
+  - [meoh](#meoh)
   - [isopropanol](#isopropanol)
   - [acetonitrile](#acetonitrile)
   - [guanidinium](#guanidinium)
   - [acetate](#acetate)
-  - [n-methylacetamide (NMA)](#n-methylacetamide-nma)
+  - [n-methylacetamide](#n-methylacetamide)
   - [benzene](#benzene)
   - [toluene](#toluene)
   - [phenol](#phenol)
@@ -102,7 +102,7 @@ This table summarizes the molecular weight and density information of 13 commonl
 
 ---
 
-## meoh (methanol)
+## meoh 
 
 **Features:**  
 - Moderate polarity  
@@ -183,7 +183,7 @@ This table summarizes the molecular weight and density information of 13 commonl
 
 ---
 
-## n-methylacetamide (NMA)
+## n-methylacetamide
 
 **Features:**  
 - Moderate polarity  
