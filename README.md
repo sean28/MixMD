@@ -2,7 +2,7 @@
 
 ## Table of Contents
 - [Principles of Usage Instructions for single probes ](#principles-of-usage-instructions-for-single-probe)
-  - [Common Probe Information](#common-probe-Information) 
+  - [Common Probe Information](#common-probe-information) 
   - [formamide](#formamide)
   - [dmso](#dmso)
   - [meoh (methanol)](#meoh-methanol)
