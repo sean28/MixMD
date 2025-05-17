@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Probe GridMap Builder</title>
+  <style>
+    body {font-family: "Segoe UI", sans-serif;background-color: #f4f6f8;margin: 0;padding: 2rem;}
+    .container {max-width: 700px;margin: auto;background: white;padding: 2rem 2.5rem;border-radius: 12px;box-shadow: 0 0 20px rgba(0,0,0,0.06);}
+    h2 {text-align: center;color: #333;}
+    label {font-weight: 600;margin-top: 1rem;display: block;}
+    input[type="file"],
+    input[type="text"],
+    select {width: 100%;padding: 0.6rem;margin-top: 0.3rem;margin-bottom: 1rem;border: 1px solid #ccc;border-radius: 6px;font-size: 1rem;}
+    button {background-color: #007bff;color: white;border: none;padding: 0.7rem 1.4rem;font-size: 1rem;border-radius: 6px;cursor: pointer;margin-top: 0.5rem;}
+    button:hover {background-color: #0056b3;}
+    .section {margin-top: 2rem;}
+    hr {margin: 2rem 0;border: none;border-top: 1px solid #ddd;}
+    progress::-webkit-progress-bar { background-color: #eee; border-radius: 6px; height: 1.2rem; }
+    progress::-webkit-progress-value { background-color: #007bff; border-radius: 6px; height: 1.2rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 style=" text-align: center; font-size: 28px; font-weight: 700; background: linear-gradient(to right, #2c3e50, #3498db); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; padding-bottom: 8px;">
+      Probe GridMap Builder
+    </h2>
+    <div style="text-align: center; line-height: 1.5; font-size: 16px; margin-top: -25px; margin-bottom: 5px;">
+      Developed by Dr. Sean's Team of Drug Design and Discovery
+    </div>
+
+
+    <form method="POST" action="/upload-trr" enctype="multipart/form-data" id="trrForm" style="margin-bottom: 2rem;">
+      <label for="trr_file">Upload Trajectory File (.trr/.nc):</label>
+      <input type="file" id="trr_file" name="trr_file" accept=".trr, .nc" required style="margin-bottom: 0.1rem; margin-right: 0.5rem;">
+      <button type="submit" style="padding: 0.3rem 0.5rem; font-size: 0.9rem;">上传 .trr 文件</button>
+      <progress id="uploadProgress" value="0" max="100" style="width: 250px; height: 1rem; vertical-align: middle; margin-left: 0.5rem;"></progress>
+    </form>
+    
+    <form method="POST" action="/run-gridmap" enctype="multipart/form-data">
+      
+      <!-- 上传 PDB -->
+      <label for="pdb_file">Upload Protein File (.pdb):</label>
+      <input type="file" id="pdb_file" name="pdb_file" required style="margin-bottom: 0.1rem">
+
+      <label>Select Trajectory File:</label>
+      <select name="traj_filename" required>
+        {% for f in trr_files %}
+          <option value="{{ f }}">{{ f }}</option>
+        {% endfor %}
+      </select>
+
+      <label>Select Probe Atoms:</label>
+      <select name="probe">
+        <option value="ACN@N,C1,C2,H1,H2,H3">ACN</option>
+        <option value="IPA@O,C1,C2,C3,H1,H2,H3,H4,H6,H7,H8">IPA</option>
+        <option value="PHN@O,C1,C2,C3,C4,C5,C6,H1,H2,H3,H4,H5,H6">PHN</option>
+        <option value="NMA@O,N,C1,C2,C3,H1,H2,H3,H4,H5,H6,H7">NMA</option>
+        <option value="PYR@N1,N2,C1,C2,C3,C4,H1,H2,H3,H4">PYR</option>
+        <option value="custom">Custom</option>
+      </select>
+
+      <label>Custom Atoms (only if 'custom' selected):</label>
+      <input type="text" name="custom_atoms" placeholder="e.g. MOL@C1,C2,H1">
+
+      <label>Grid Spacing (dx):</label>
+      <label style="margin-top: 2px; margin-bottom: 2px;;display: block; font-size:14px; color: #827e7e;">Spacing (unit: nm) between grid points used to calculate probe densities. Smaller = higher resolution.</label>
+      <input type="text" name="dx" value="0.5">
+      
+
+      <label>Normalize Frame Count:</label>
+      <label style="margin-top: 2px; margin-bottom: 2px; display: block; font-size:14px; color: #827e7e;">Number of MD frames used to normalize probe occurrence frequencies.</label>
+      <input type="text" name="normframe" value="1000">
+      
+      <label>Max Cutoff Distance:</label>
+      <label style="margin-top: 2px; margin-bottom: 2px; display: block; font-size:14px; color: #827e7e;">Maximum distance (unit: nm) between a probe atom and target region to be counted in the density map.</label>
+      <input type="text" name="max" value="0.35">
+
+      <button type="submit">Run GridMap Builder</button>
+    </form>
+    <hr>
+    <div style="margin-top: 3rem; padding: 1.5rem 2rem; border-radius: 10px; background-color: #f8f9fa; border: 1px solid #dcdcdc; font-size: 15px; line-height: 1.7; color: #444;">
+    <h3 style="text-align: center; font-weight: 700; color: #2c3e50; margin-top: 0; margin-bottom: 1rem;">How to Use This Tool</h3>
+    <ul style="padding-left: 1.2rem; margin: 0;">
+      <li>Upload a trajectory file (<code>.trr</code> or <code>.nc</code>) containing molecular dynamics frames.</li>
+      <li>Select a protein structure file (in <code>.pdb</code> format).</li>
+      <li>Choose one of the built-in probe molecules, or define your own using custom atom syntax.</li>
+      <li>Adjust grid spacing, cutoff, and normalization parameters as needed.</li>
+      <li>Click <strong>“Run GridMap Builder”</strong> to start the analysis and download the output grid map file.</li>
+    </ul>
+    <p style="text-align: left; margin-top: 0px; color: #888;">This tool will automatically generate a pdb file of probe molecule arrangement for pymol plotting and subsequent density analysis.</p>
+  </div>
+  </div>
+  
+</body>
+<script>
+document.querySelector('button[form="trrForm"]').addEventListener('click', function(e) {
+  e.preventDefault();
+  const fileInput = document.getElementById('trr_file');
+  const progressBar = document.getElementById('uploadProgress');
+  const file = fileInput.files[0];
+  if (!file) return alert("请选择一个 .trr 文件");
+
+  const formData = new FormData();
+  formData.append('trr_file', file);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/upload-trr', true);
+
+  xhr.upload.onprogress = function(e) {
+    if (e.lengthComputable) {
+      progressBar.value = (e.loaded / e.total) * 100;
+    }
+  };
+
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      progressBar.value = 100;
+    } else {
+      alert("上传失败");
+      progressBar.value = 0;
+    }
+  };
+
+  xhr.send(formData);
+});
+</script>
+</html>
