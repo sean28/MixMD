@@ -1,8 +1,3 @@
 # Molecular Probe Combination Guide (Hybrid Solvent Inserter)
-
-## Abstract
-
-Molecular probes are essential tools for uncovering cryptic pockets and potential binding hotspots in protein structures.  
-This article systematically summarizes the properties, suitable environments, and recommended combinations of 13 commonly used probes in hybrid solvent molecular dynamics (MixMD) simulations.  
-Detailed usage notes are provided for each individual probe, offering practical guidance for selecting and combining probes based on pocket polarity, hydrophobicity, aromaticity, and charge characteristics.  
-This comprehensive guide aims to help researchers design more effective probe sets for structure-based drug discovery and molecular recognition studies.
+<div style="text-align: justify"> Molecular probes are essential tools for uncovering cryptic pockets and potential binding hotspots in protein structures. This article systematically summarizes the properties, suitable environments, and recommended combinations of 13 commonly used probes in Mixed solvent molecular dynamics (MixMD) simulations. Detailed usage notes are provided for each individual probe, offering practical guidance for selecting and combining probes based on pocket polarity, hydrophobicity, aromaticity, and charge characteristics. This comprehensive guide aims to help researchers design more effective probe sets for structure-based drug discovery and molecular recognition studies. You can use this guide for free by clicking <a href="https://sean28.github.io/MixMD/">here</a>.</div>
+<div style="text-align: justify"> <br> </div>
