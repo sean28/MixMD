@@ -14,7 +14,7 @@
 ```bash
 
 # 1. Extract GridMap_denv.tar.gz 
-tar -xzf GridMap_env.tar.gz & cd GridMap_env
+tar -xzf GridMap_env.tar.gz && cd GridMap_env
 
 # 2. Activate Environment
 source bin/activate
