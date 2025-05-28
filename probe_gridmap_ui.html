@@ -10,8 +10,8 @@
     label {font-weight: 600;margin-top: 1rem;display: block;}
     input[type="file"],
     input[type="text"],
-    select {width: 100%;padding: 0.6rem;margin-top: 0.3rem;margin-bottom: 1rem;border: 1px solid #ccc;border-radius: 6px;font-size: 1rem;}
-    button {background-color: #007bff;color: white;border: none;padding: 0.7rem 1.4rem;font-size: 1rem;border-radius: 6px;cursor: pointer;margin-top: 0.5rem;}
+    select {width: 100%; height:42px; padding: 0.6rem;margin-top: 0.3rem;margin-bottom: 0rem;border: 1px solid #ccc;border-radius: 6px;font-size: 1rem; box-sizing: border-box;}
+    button { width: auto; height:42px; background-color: #007bff;color: white;border: none;padding: 0.7rem 1.4rem;font-size: 1rem;border-radius: 6px;cursor: pointer;margin-top: 1rem;}
     button:hover {background-color: #0056b3;}
     .section {margin-top: 2rem;}
     hr {margin: 2rem 0;border: none;border-top: 1px solid #ddd;}
@@ -29,11 +29,12 @@
     </div>
 
 
-    <form method="POST" action="/upload-trr" enctype="multipart/form-data" id="trrForm" style="margin-bottom: 2rem;">
+    <form method="POST" action="/upload-trr" enctype="multipart/form-data" id="trrForm" >
       <label for="trr_file">Upload Trajectory File (.trr/.nc):</label>
-      <input type="file" id="trr_file" name="trr_file" accept=".trr, .nc" required style="margin-bottom: 0.1rem; margin-right: 0.5rem;">
-      <button type="submit" style="padding: 0.3rem 0.5rem; font-size: 0.9rem;">上传 .trr 文件</button>
-      <progress id="uploadProgress" value="0" max="100" style="width: 250px; height: 1rem; vertical-align: middle; margin-left: 0.5rem;"></progress>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <input  type="file" id="trr_file" name="trr_file" accept=".trr, .nc" required>
+        <button type="submit" style="margin-top: 3px" >Upload</button>
+      </div>
     </form>
     
     <form method="POST" action="/run-gridmap" enctype="multipart/form-data">
@@ -43,19 +44,27 @@
       <input type="file" id="pdb_file" name="pdb_file" required style="margin-bottom: 0.1rem">
 
       <label>Select Trajectory File:</label>
-      <select name="traj_filename" required>
+      <select style="height: 32px;" name="traj_filename" required>
         {% for f in trr_files %}
           <option value="{{ f }}">{{ f }}</option>
         {% endfor %}
       </select>
 
       <label>Select Probe Atoms:</label>
-      <select name="probe">
-        <option value="ACN@N,C1,C2,H1,H2,H3">ACN</option>
-        <option value="IPA@O,C1,C2,C3,H1,H2,H3,H4,H6,H7,H8">IPA</option>
-        <option value="PHN@O,C1,C2,C3,C4,C5,C6,H1,H2,H3,H4,H5,H6">PHN</option>
-        <option value="NMA@O,N,C1,C2,C3,H1,H2,H3,H4,H5,H6,H7">NMA</option>
-        <option value="PYR@N1,N2,C1,C2,C3,C4,H1,H2,H3,H4">PYR</option>
+      <select name="probe" style="height: 32px;">
+        <option value="ACN@N,C1,C2,H1,H2,H3">Acetonitrile (ACN)</option>
+        <option value="IPA@O,C1,C2,C3,H1,H2,H3,H4,H6,H7,H8">Isopropanol (IPA)</option>
+        <option value="PHN@O,C1,C2,C3,C4,C5,C6,H1,H2,H3,H4,H5,H6">Phenol (PHN)</option>
+        <option value="NMA@O,N,C1,C2,C3,H1,H2,H3,H4,H5,H6,H7">N-Methylacetamide (NMA)</option>
+        <option value="PYR@N1,N2,C1,C2,C3,C4,H1,H2,H3,H4">Pyrimidine (PYR)</option>
+        <option value="FMA@C,O,N,H1,H2">Formamide (FMA)</option>
+        <option value="DMS@S,O,C1,C2,H1,H2,H3,H4,H5,H6">Dimethyl Sulfoxide (DMS)</option>
+        <option value="MEH@O,C,H1,H2,H3">Methanol (MEH)</option>
+        <option value="GUA@C,N1,N2,N3,H1,H2,H3,H4,H5,H6">Guanidinium (GUA)</option>
+        <option value="ACE@C1,C2,O,O-,H1,H2,H3">Acetate (ACE)</option>
+        <option value="BNZ@C1,C2,C3,C4,C5,C6,H1,H2,H3,H4,H5,H6">Benzene (BNZ)</option>
+        <option value="TOL@C1,C2,C3,C4,C5,C6,C7,H1,H2,H3,H4,H5,H6,H7,H8,H9">Toluene (TOL)</option>
+        <option value="IND@C1,C2,C3,C4,C5,C6,C7,C8,N1,H1,H2,H3,H4,H5,H6,H7">Indole (IND)</option>
         <option value="custom">Custom</option>
       </select>
 
@@ -96,9 +105,8 @@
 document.querySelector('button[form="trrForm"]').addEventListener('click', function(e) {
   e.preventDefault();
   const fileInput = document.getElementById('trr_file');
-  const progressBar = document.getElementById('uploadProgress');
   const file = fileInput.files[0];
-  if (!file) return alert("请选择一个 .trr 文件");
+  if (!file) return alert("Please select a. trr file");
 
   const formData = new FormData();
   formData.append('trr_file', file);
@@ -106,11 +114,16 @@ document.querySelector('button[form="trrForm"]').addEventListener('click', funct
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '/upload-trr', true);
 
-  xhr.upload.onprogress = function(e) {
-    if (e.lengthComputable) {
-      progressBar.value = (e.loaded / e.total) * 100;
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      alert("Upload successful");
+    } else {
+      alert("Upload failed");
     }
   };
+
+  xhr.send(formData);
+});
 
   xhr.onload = function() {
     if (xhr.status === 200) {
@@ -122,6 +135,5 @@ document.querySelector('button[form="trrForm"]').addEventListener('click', funct
   };
 
   xhr.send(formData);
-});
 </script>
 </html>
