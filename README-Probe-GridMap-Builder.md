@@ -18,6 +18,7 @@ tar -xzf GridMap_env.tar.gz & cd GridMap_env
 
 # 2. Activate Environment
 source bin/activate
+```
 
 ## 🚀 Run the Server
 
