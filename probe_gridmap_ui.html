@@ -15,38 +15,53 @@
     button:hover {background-color: #0056b3;}
     .section {margin-top: 2rem;}
     hr {margin: 2rem 0;border: none;border-top: 1px solid #ddd;}
-    progress::-webkit-progress-bar { background-color: #eee; border-radius: 6px; height: 1.2rem; }
-    progress::-webkit-progress-value { background-color: #007bff; border-radius: 6px; height: 1.2rem; }
+    .probe-box-wrapper {margin-top:6px;}
+    .probe-box-label {font-size:12px;color:#666;margin-bottom:3px;}
+    .probe-box {border:1px solid #ddd;border-radius:6px;background-color:#fafafa;padding:6px 8px;font-size:12px;color:#555;max-height:96px;           /* 超出就滚动 */overflow-y:auto;line-height:1.4;white-space:pre-wrap;      /* 按 \n 换行 */word-break:break-all;      /* 太长也强制换行 */}
   </style>
 </head>
+
 <body>
   <div class="container">
-    <h2 style=" text-align: center; font-size: 28px; font-weight: 700; background: linear-gradient(to right, #2c3e50, #3498db); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; padding-bottom: 8px;">
+    <h2
+      style=" text-align: center; font-size: 28px; font-weight: 700; background: linear-gradient(to right, #2c3e50, #3498db); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; padding-bottom: 8px;">
       Probe GridMap Builder
     </h2>
     <div style="text-align: center; line-height: 1.5; font-size: 16px; margin-top: -25px; margin-bottom: 5px;">
       Developed by Dr. Sean's Team of Drug Design and Discovery
     </div>
 
-
-    <form method="POST" action="/upload-trr" enctype="multipart/form-data" id="trrForm" >
-      <label for="trr_file">Upload Trajectory File (.trr/.nc):</label>
+    <!-- 上传 TRR 文件 -->
+    <form id="trrForm">
+      <label for="trr_file">Upload Trajectory File (.trr/.nc/.xtc):</label>
       <div style="display: flex; align-items: center; gap: 0.5rem;">
-        <input  type="file" id="trr_file" name="trr_file" accept=".trr, .nc" required>
-        <button type="submit" style="margin-top: 3px" >Upload</button>
+        <input type="file" id="trr_file" name="trr_file" accept=".trr, .nc, .xtc" required>
+        <button type="button" id="upload_trr_btn" style="margin-top: 3px">Upload</button>
       </div>
     </form>
-    
-    <form method="POST" action="/run-gridmap" enctype="multipart/form-data">
-      
-      <!-- 上传 PDB -->
+
+    <!-- 上传 PDB 文件 -->
+    <form id="pdbForm">
       <label for="pdb_file">Upload Protein File (.pdb):</label>
-      <input type="file" id="pdb_file" name="pdb_file" required style="margin-bottom: 0.1rem">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <input type="file" id="pdb_file" name="pdb_file" accept=".pdb" required>
+        <button type="button" id="upload_pdb_btn" style="margin-top: 3px">Upload</button>
+      </div>
+    </form>
+
+    <!-- 主运行表单 -->
+    <form method="POST" action="/run-gridmap" enctype="multipart/form-data">
+      <label>Select Protein File:</label>
+      <select style="height: 32px;" name="pdb_filename" id="pdb_select" required>
+        {% for f in pdb_files %}
+        <option value="{{ f }}">{{ f }}</option>
+        {% endfor %}
+      </select>
 
       <label>Select Trajectory File:</label>
-      <select style="height: 32px;" name="traj_filename" required>
+      <select style="height: 32px;" name="traj_filename" id="traj_select" required>
         {% for f in trr_files %}
-          <option value="{{ f }}">{{ f }}</option>
+        <option value="{{ f }}">{{ f }}</option>
         {% endfor %}
       </select>
 
@@ -68,72 +83,156 @@
         <option value="custom">Custom</option>
       </select>
 
-      <label>Custom Atoms (only if 'custom' selected):</label>
-      <input type="text" name="custom_atoms" placeholder="e.g. MOL@C1,C2,H1">
+      <div id="custom_block" style="display:none; margin-top:0.5rem;">
+        <label>Custom Atoms (only if 'custom' selected):</label>
+        <input type="text" name="custom_atoms" id="custom_atoms" placeholder="e.g. LIG@C1,C2,C3,C4,C5,C6,H1,H2,H3,H4,H5,H6">
+      
+        <div class="probe-box-wrapper">
+          <div class="probe-box-label">
+            Detected non-standard components:
+          </div>
+          <div id="probe_templates" class="probe-box"></div>
+        </div>
+      </div>
 
       <label>Grid Spacing (dx):</label>
-      <label style="margin-top: 2px; margin-bottom: 2px;;display: block; font-size:14px; color: #827e7e;">Spacing (unit: nm) between grid points used to calculate probe densities. Smaller = higher resolution.</label>
       <input type="text" name="dx" value="0.5">
-      
 
       <label>Normalize Frame Count:</label>
-      <label style="margin-top: 2px; margin-bottom: 2px; display: block; font-size:14px; color: #827e7e;">Number of MD frames used to normalize probe occurrence frequencies.</label>
       <input type="text" name="normframe" value="1000">
-      
+
       <label>Max Cutoff Distance:</label>
-      <label style="margin-top: 2px; margin-bottom: 2px; display: block; font-size:14px; color: #827e7e;">Maximum distance (unit: nm) between a probe atom and target region to be counted in the density map.</label>
       <input type="text" name="max" value="0.35">
 
       <button type="submit">Run GridMap Builder</button>
     </form>
-    <hr>
-    <div style="margin-top: 3rem; padding: 1.5rem 2rem; border-radius: 10px; background-color: #f8f9fa; border: 1px solid #dcdcdc; font-size: 15px; line-height: 1.7; color: #444;">
-    <h3 style="text-align: center; font-weight: 700; color: #2c3e50; margin-top: 0; margin-bottom: 1rem;">How to Use This Tool</h3>
-    <ul style="padding-left: 1.2rem; margin: 0;">
-      <li>Upload a trajectory file (<code>.trr</code> or <code>.nc</code>) containing molecular dynamics frames.</li>
-      <li>Select a protein structure file (in <code>.pdb</code> format).</li>
-      <li>Choose one of the built-in probe molecules, or define your own using custom atom syntax.</li>
-      <li>Adjust grid spacing, cutoff, and normalization parameters as needed.</li>
-      <li>Click <strong>“Run GridMap Builder”</strong> to start the analysis and download the output grid map file.</li>
-    </ul>
-    <p style="text-align: left; margin-top: 0px; color: #888;">This tool will automatically generate a pdb file of probe molecule arrangement for pymol plotting and subsequent density analysis.</p>
-  </div>
   </div>
   
+  <script>
+    // 根据当前选择的 PDB，向后端请求非标准残基模板，在 Custom 下方灰色显示
+    function loadProbeTemplates() {
+      const pdbSelect = document.getElementById('pdb_select');
+      const infoDiv = document.getElementById('probe_templates');
+      if (!pdbSelect || !infoDiv) return;
+
+      const pdb = pdbSelect.value;
+      if (!pdb) {
+        infoDiv.textContent = '';
+        return;
+      }
+
+      fetch('/probe-templates?pdb=' + encodeURIComponent(pdb))
+        .then(resp => resp.json())
+        .then(data => {
+          if (data.status !== 'success' || !data.templates || data.templates.length === 0) {
+            infoDiv.textContent = 'No non-standard residues detected for probes.';
+            return;
+          }
+          // 每个模板一行，利用 .probe-box 的 pre-wrap 自动换行
+          infoDiv.textContent = data.templates.join('\n');
+        })
+        .catch(err => {
+          console.error('probe-templates error', err);
+          infoDiv.textContent = 'Failed to load probe templates.';
+        });
+    }
+
+    // 根据 Probe 下拉选择，决定是否显示 Custom 区块
+    function updateCustomVisibility() {
+      const probeSelect = document.querySelector('select[name="probe"]');
+      const customBlock = document.getElementById('custom_block');
+      if (!probeSelect || !customBlock) return;
+      if (probeSelect.value === 'custom') {
+        customBlock.style.display = 'block';
+      } else {
+        customBlock.style.display = 'none';
+      }
+    }
+
+    // 上传 PDB 文件并刷新下拉框
+    document.getElementById('upload_pdb_btn').addEventListener('click', function () {
+      const fileInput = document.getElementById('pdb_file');
+      const file = fileInput.files[0];
+      if (!file) {
+        alert("Please select a .pdb file");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('pdb_file', file);
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/upload-pdb', true);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          if (response.status === "success") {
+            const select = document.getElementById('pdb_select');
+            select.innerHTML = "";
+            response.pdb_files.forEach(f => {
+              const option = document.createElement("option");
+              option.value = f;
+              option.textContent = f;
+              select.appendChild(option);
+            });
+            select.value = file.name;
+            loadProbeTemplates();
+          }
+        }
+      };
+      xhr.send(formData);
+    });
+
+    // 上传 TRR 文件并刷新下拉框
+    document.getElementById('upload_trr_btn').addEventListener('click', function () {
+      const fileInput = document.getElementById('trr_file');
+      const file = fileInput.files[0];
+      if (!file) {
+        alert("Please select a .trr, .nc, or .xtc file");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('trr_file', file);
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/upload-trr', true);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          if (response.status === "success") {
+            const select = document.getElementById('traj_select');
+            select.innerHTML = "";
+            response.trr_files.forEach(f => {
+              const option = document.createElement("option");
+              option.value = f;
+              option.textContent = f;
+              select.appendChild(option);
+            });
+            select.value = file.name;
+          }
+        }
+      };
+      xhr.send(formData);
+    });
+
+    // 页面初次加载时，根据默认选中 PDB 刷新探针提示，并根据 Probe 类型控制 Custom 显示
+    window.addEventListener('load', function () {
+      loadProbeTemplates();
+      updateCustomVisibility();
+    });
+
+    // 切换选择 PDB 时，刷新探针提示
+    const pdbSelectEl = document.getElementById('pdb_select');
+    if (pdbSelectEl) {
+      pdbSelectEl.addEventListener('change', loadProbeTemplates);
+    }
+
+    // 切换 Probe 类型时，显示/隐藏 Custom 区域
+    const probeSelectEl = document.querySelector('select[name="probe"]');
+    if (probeSelectEl) {
+      probeSelectEl.addEventListener('change', updateCustomVisibility);
+    }
+  </script>
 </body>
-<script>
-document.querySelector('button[form="trrForm"]').addEventListener('click', function(e) {
-  e.preventDefault();
-  const fileInput = document.getElementById('trr_file');
-  const file = fileInput.files[0];
-  if (!file) return alert("Please select a. trr file");
-
-  const formData = new FormData();
-  formData.append('trr_file', file);
-
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', '/upload-trr', true);
-
-  xhr.onload = function() {
-    if (xhr.status === 200) {
-      alert("Upload successful");
-    } else {
-      alert("Upload failed");
-    }
-  };
-
-  xhr.send(formData);
-});
-
-  xhr.onload = function() {
-    if (xhr.status === 200) {
-      progressBar.value = 100;
-    } else {
-      alert("上传失败");
-      progressBar.value = 0;
-    }
-  };
-
-  xhr.send(formData);
-</script>
 </html>
