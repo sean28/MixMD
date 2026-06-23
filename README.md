@@ -5,7 +5,7 @@ Molecular probes are essential tools for uncovering cryptic pockets and potentia
 
 
 
-**MixMD System Builder** is a web-based application for generating mixed-solvent molecular simulation systems. It supports protein structure upload, flexible probe selection, box configuration, and automatic topology generation. Users can easily integrate custom molecules and apply optional solvation and ionization, resulting in ready-to-use simulation packages. I redeployed this online tool in my repository and you can use this tool for free by clicking <a href="https://cadd.sean28299.dpdns.org">here</a>.
+**MixMD System Builder** is a web-based application for generating mixed-solvent molecular simulation systems. It supports protein structure upload, flexible probe selection, box configuration, and automatic topology generation. Users can easily integrate custom molecules and apply optional solvation and ionization, resulting in ready-to-use simulation packages. I redeployed this online tool in my repository and you can use this tool for free by clicking <a href="https://cadd.19701016.xyz">here</a>.
 <div style="text-align: justify"> <br> </div>
 <img src="https://raw.githubusercontent.com/sean28/MixMD/main/MixMD-Builder.png"> 
 
